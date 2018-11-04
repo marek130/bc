@@ -34,9 +34,9 @@ def parseFile():
 		endVertices = endVertices.strip()
 		endVertices = endVertices.split(',')
 		for vertex in endVertices:
-			company    = ".".join(vertex.split(".")[:-2])
-			nameOfNode = vertex.split(".")[-2:-1][0]
-			attempt    = vertex.split(".")[-1]
+			companyOfNode = ".".join(vertex.split(".")[:-2])
+			nameOfNode    = vertex.split(".")[-2:-1][0]
+			attempt       = vertex.split(".")[-1]
 			a = "Company_" + companyOfNode.replace(".", "_")
 			if companyOfNode not in companies:
 				nodes[companyOfNode] 	 = {}
