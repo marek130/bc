@@ -10,7 +10,7 @@
  
 # Popisy jednotlivých súborov
  ---
-## Skripty na transform8ciu pravidiel do grafov
+## Skripty na transformáciu pravidiel do grafov
 ### `MATRIX.PY`
 - skript na generovanie matice susednosti z pravidiel SABU
 - skript berie ako argument cestu k súboru so SABU pravidlami
