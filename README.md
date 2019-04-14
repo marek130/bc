@@ -30,7 +30,6 @@
 - skript na vizualizáciu pravidel do grafovej databáze Neo4j
 - skript berie 1 argument a to cestu k súboru s pravidlami
 - **požiadavky**: knižnica py2neo
-![Výsledok:](https://github.com/marek130/bc/blob/master/resultOfScripts/top10.png"Vysledok")
 
 ### `JSONTONEO4J.PY`
 - skript na vizualizáciu grafu útoku vo formáte JSON do grafovej databáze Neo4j
