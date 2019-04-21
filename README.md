@@ -31,7 +31,7 @@
 - **požiadavky**: knižnica JSON
 
 ## Skripty na vizualizáciu
-### `RULESTOJSON.PY`
+### `RULESTONEO4J.PY`
 - skript na vizualizáciu SABU pravidel do grafovej databáze Neo4j
 - skript berie 1 argument a to cestu k súboru s pravidlami
 - **požiadavky**: knižnica py2neo
@@ -48,8 +48,8 @@
 - **požiadavky**: knižnica bintrees, knižnica Time, knižnica re, knižnica functools, knižnica JSON, knižnica calendar
 
 ### `SIMULATEATTACKER.PY`
-- skript simulujúci utocníkov v sieti pomocou Petriho sieti. Ako výsledok skriptu sú predpovede postopov útočníka
-- skript berie 4 parametre. Prvý parameter reprezentuje cestu k súboru s bezpečnostnými udalosťami. Druhý parameter slúži ako názov súboru s novo vygenerovanými pravidlami. Tretí parameter reprezentuje hraničnú hodnotu podpory (SUPPORT), pre filtrovanie výsledných pravidiel. Posledný parameter reprezentuje hraničnú hodnotu istoty (CONFIDENCE), pre filtrovanie výsledných pravidiel
-- - **požiadavky**: knižnica bintrees, knižnica Time, knižnica re, knižnica functools, knižnica JSON, knižnica calendar, knižnica random
+- skript simulujúci útočníkov v sieti pomocou Petriho sieti. Ako výsledok skriptu sú predpovede postopov útočníka
+- skript berie 6 argumentov. Prvý argument reprezentuje cestu k súboru s bezpečnostnými udalosťami. Druhý argument slúži ako názov súboru s novo vygenerovanými pravidlami. Tretí argument reprezentuje počet útočníkov v simulácií. Ďalší argument reprezentuje maximálnu dĺžku sekvencie útoku u útočníka. Hraničnú hodnotu podpory (SUPPORT) zastupuje piaty argument, ktorý je použitý pre filtrovanie výsledných pravidiel. Posledný argument reprezentuje hraničnú hodnotu istoty (CONFIDENCE), pre filtrovanie výsledných pravidiel.
+-  **požiadavky**: knižnica bintrees, knižnica Time, knižnica re, knižnica functools, knižnica JSON, knižnica calendar, knižnica random
 
  
