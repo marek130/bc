@@ -9,6 +9,10 @@
  * createRules.py
  * simulateAttacker.py
  
+# Všetky skripty boli testované na:
+* Elementary OS 5
+* python 2.7.12
+
 # Popisy jednotlivých súborov
  ---
 ## Skripty na transformáciu pravidiel do grafovych modelov
