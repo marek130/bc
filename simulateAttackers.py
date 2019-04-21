@@ -129,14 +129,14 @@ def simulateAttackers(petriNet, numberOfAttempts, longOfSequence):
     return logs
 
 
-def analyzeLogs(logs, numberOfAttempts):
+def analyzeLogs(logs, numberOfAttempts, support, confidence):
     print("START ANALYZING LOGS")
     file = open(sys.argv[2], "w")
     for log in logs:
         if log == "conf":
            continue
         predicat = log.split(" ==> ")[0]
-        if (len(logs[log])/numberOfAttempts >= 0.05) and (len(logs[log])/len(logs["conf"][predicat]) >= 0.5):
+        if (len(logs[log])/numberOfAttempts >= support) and (len(logs[log])/len(logs["conf"][predicat]) >= confidence):
             file.write(log + " #SUPP: " + str(len(logs[log])/numberOfAttempts) + " (" + str(len(logs[log])) + "/" + str(numberOfAttempts) + ") #CONF: " + str(len(logs[log])/len(logs["conf"][predicat])) + "\n")
 
 
@@ -145,9 +145,11 @@ def init():
     net = createPetriNet(db)
     numberOfAttempts = int(sys.argv[3])
     longOfSequence = int(sys.argv[4])
+    tresholdSupport = float(sys.argv[5])
+    tresholdConfidence = float(sys.argv[6])
     logs = simulateAttackers(net, numberOfAttempts, longOfSequence) 
     print("FINISH SIMULATION")
-    analyzeLogs(logs, numberOfAttempts)
+    analyzeLogs(logs, numberOfAttempts, tresholdSupport, tresholdConfidence)
     print("DONE! YOUR PREDICTIONS ARE AVAILABLE IN FILE: " + sys.argv[2])
 
 init()
