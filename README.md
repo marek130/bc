@@ -48,7 +48,7 @@
 - **požiadavky**: knižnica bintrees, knižnica Time, knižnica re, knižnica functools, knižnica JSON, knižnica calendar
 
 ### `SIMULATEATTACKERS.PY`
-- skript simulujúci útočníkov v sieti pomocou Petriho sieti. Ako výsledok skriptu sú predpovede postopov útočníka
+- skript simulujúci útočníkov v sieti pomocou Petriho sieti. Ako výsledok skriptu sú predpovede postupov útočníka
 - skript berie 6 argumentov. Prvý argument reprezentuje cestu k súboru s bezpečnostnými udalosťami. Druhý argument slúži ako názov súboru s novo vygenerovanými pravidlami. Tretí argument reprezentuje počet útočníkov v simulácií. Ďalší argument reprezentuje maximálnu dĺžku sekvencie útoku u útočníka. Hraničnú hodnotu podpory (SUPPORT) zastupuje piaty argument, ktorý je použitý pre filtrovanie výsledných pravidiel. Posledný argument reprezentuje hraničnú hodnotu istoty (CONFIDENCE), pre filtrovanie výsledných pravidiel.
 -  **požiadavky**: knižnica bintrees, knižnica Time, knižnica re, knižnica functools, knižnica JSON, knižnica calendar, knižnica random
 
