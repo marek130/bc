@@ -117,7 +117,6 @@ def createGraph(db):
     ancestors = [graph.getRoot()]
     graph.addToHashMap(graph.getRoot())
     conf = {}
-
     for ip, sequence in db.items():
         negative_cycle = False
         ancestors = [graph.getRoot()]
@@ -141,7 +140,6 @@ def createGraph(db):
                  continue
               if (node in path and negative_cycle == True):
                  map(lambda x: x.updateChildren(node, ip), ancestors)
-               #  path.append(node)
                  node.updateAncestors(path, ip)
                  ancs.append(node)
                  continue
@@ -149,44 +147,16 @@ def createGraph(db):
                  map(lambda x: x.updateChildren(node, ip), ancestors)
                  negative_cycle = True
                  node.updateAncestors(path, ip)
-              #   path.append(ancs)
                  ancs.append(node)
                  continue
               else:
                  negative_cycle = False
-             # path.append(node)
               node.updateAncestors(path, ip)
               map(lambda x: x.updateChildren(node, ip), ancestors)
               ancs.append(node)
            ancestors = ancs
            path += list(ancs)
     return (graph, conf)
-
-
-def foo(items, node, confHash, totalSeq, conf, number):
-   print("XXX")
-   names = [o[0] for o in items]
-   tmpConf =  reduce((lambda x, y: x.intersection(y)), (o[1] for o in items))
-   tmpNames = reduce((lambda x, y: x + "," + y), names)
-   aa = list(names)
-   aa.append(node.name)
-   tmpDelimeterConf = map((lambda x: confHash[x]), aa)
-   final = len(tmpConf.intersection(confHash[node.name]))
-
-   if final/totalSeq >= number and final/len(set.intersection(*tmpDelimeterConf)) >= conf:
-      return tmpNames + " ==> " + node.name + " #SUPP: " + str(final/totalSeq) + " (" + str(final) + "/" + str(totalSeq) + ") #CONF: " + str(final/len(set.intersection(*tmpDelimeterConf)))
-   return ""
-
-
-def makePermutation(array, node, confHash, totalSeq, conf, number, result):
-    print("YYY")
-    b = []
-    for length in range(1, len(array)):
-       if length > 2:
-          break
-       b += map(lambda x: foo(x, node, confHash, totalSeq, conf, number), list(itertools.combinations(array, length)))
-    print(b)
-
 
 
 def findNodeThanMore(node, totalSeq, confHash, conf, number, result):
@@ -196,9 +166,9 @@ def findNodeThanMore(node, totalSeq, confHash, conf, number, result):
           continue
        else:
           ancs = child.ancestors.nsmallest(child.ancestors.__len__)
-          for a, v in ancs:
-              if a != "Attacker" and (len(v)/len(confHash[a]) >= conf and len(v)/totalSeq >= number):
-                 result.add(a + " ==> " + child.name + " (" + str(len(v)) + "/" + str(totalSeq) + ") #CONF: " + str(len(v)/len(confHash[a])))
+          for nameOfAlert, occurrence in ancs:
+              if nameOfAlert != "Attacker" and (len(occurrence)/len(confHash[nameOfAlert]) >= conf and len(occurrence)/totalSeq >= number):
+                 result.add(nameOfAlert + " ==> " + child.name + " #SUPP: " + str(len(occurrence)/totalSeq) + " (" + str(len(occurrence)) + "/" + str(totalSeq) + ") #CONF: " + str(len(occurrence)/len(confHash[nameOfAlert])))
           findNodeThanMore(child, totalSeq, confHash, conf, number, result)
     return result
 
@@ -218,11 +188,6 @@ def writeRulesToFIle(rules):
 
 
 tmpDB = createSequenceDB()
-print(len(tmpDB))
-start = time.time()
 graph,conf = createGraph(tmpDB)
-print(len(graph.hasMap))
-rules = createRules(graph, len(tmpDB), conf, 0.0006, 0.5)
-end = time.time()
-print(end - start)
+rules = createRules(graph, len(tmpDB), conf, float(sys.argv[3]), float(sys.argv[4]))
 writeRulesToFIle(rules)
