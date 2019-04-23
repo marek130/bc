@@ -22,7 +22,7 @@
    
    1.3 chcem vizualizovať grafový model. Použiť jeden zo skriptov na `Skripty na vizualizáciu`
 
-2) Chcem si vygenerovať pravidla. Použiť skripty zo sekcie `Generovanie pravidel`
+2) Chcem si vygenerovať pravidla. Použiť skripty zo sekcie `Skripty na generovanie pravidiel`
 
    2.1 Pokračovať bodom 1
 
