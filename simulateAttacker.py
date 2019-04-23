@@ -91,28 +91,32 @@ def createPetriNet(db):
     return petriNet
 
 
-def logPath(parent, node, logs, attacker):
-    rule = parent + " ==> " + node
-    if rule in logs:
-        logs[rule].add(attacker)
-    else:
-        logs[rule] = set()
-        logs[rule].add(attacker)
+def logPath(path, node, logs, attacker):
+    parents = path.split(",")[:-1]
+    for parent in parents: 
+        if parent == node: continue
+        rule = parent + " ==> " + node
+        if rule in logs:
+            logs[rule].add(attacker)
+        else:
+            logs[rule] = set()
+            logs[rule].add(attacker)
     
-    if parent not in logs["conf"]:
-        logs["conf"][parent] = set()
-        logs["conf"][parent].add(attacker)
-    else:
-        logs["conf"][parent].add(attacker)
+        if parent not in logs["conf"]:
+            logs["conf"][parent] = set()
+            logs["conf"][parent].add(attacker)
+        else:
+            logs["conf"][parent].add(attacker)
     
 
 def simulateAttackers(petriNet, numberOfAttempts, longOfSequence):
     print("SIMULATION STARTED")
     logs = {"conf": {}}
     for attacker in range(numberOfAttempts):
+        print(attacker)
         petriNet.set_marking(Marking(Attacker=[""]))
         node = ["Attacker"]
-        parent = "Attacker"
+        path = []
         for k in range(longOfSequence):
             isThereSuccessor = petriNet.post(node)
             if len(isThereSuccessor) == 0:
@@ -121,22 +125,19 @@ def simulateAttackers(petriNet, numberOfAttempts, longOfSequence):
             tmpArray = [transition]    
             petriNet.transition(transition).fire(petriNet.transition(transition).modes()[0]) # PRECHOD MOZE MAT LEN JEDEN UZOL
             node = [petriNet.post(tmpArray).pop()]
-            if parent == "Attacker": 
-                parent = node[0]
-                continue
-            logPath(parent, node[0], logs, attacker)
-            parent = node[0]
+            path = petriNet.place(node[0]).tokens.keys()[0]
+            logPath(path, node[0], logs, attacker)
     return logs
 
 
-def analyzeLogs(logs, numberOfAttempts):
+def analyzeLogs(logs, numberOfAttempts, support, confidence):
     print("START ANALYZING LOGS")
     file = open(sys.argv[2], "w")
     for log in logs:
         if log == "conf":
            continue
         predicat = log.split(" ==> ")[0]
-        if (len(logs[log])/numberOfAttempts >= 0.05) and (len(logs[log])/len(logs["conf"][predicat]) >= 0.5):
+        if (len(logs[log])/numberOfAttempts >= support) and (len(logs[log])/len(logs["conf"][predicat]) >= confidence):
             file.write(log + " #SUPP: " + str(len(logs[log])/numberOfAttempts) + " (" + str(len(logs[log])) + "/" + str(numberOfAttempts) + ") #CONF: " + str(len(logs[log])/len(logs["conf"][predicat])) + "\n")
 
 
@@ -145,9 +146,11 @@ def init():
     net = createPetriNet(db)
     numberOfAttempts = int(sys.argv[3])
     longOfSequence = int(sys.argv[4])
+    tresholdSUPP = float(sys.argv[5])
+    tresholdCONF = float(sys.argv[6])
     logs = simulateAttackers(net, numberOfAttempts, longOfSequence) 
     print("FINISH SIMULATION")
-    analyzeLogs(logs, numberOfAttempts)
+    analyzeLogs(logs, numberOfAttempts, tresholdSUPP, tresholdCONF)
     print("DONE! YOUR PREDICTIONS ARE AVAILABLE IN FILE: " + sys.argv[2])
 
 init()
