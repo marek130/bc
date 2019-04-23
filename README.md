@@ -19,6 +19,7 @@
    1.1 chcem ich vyzualivoať. Použiť jeden zo skriptov na vizualizáciu. Ak chcem graf uložiť pokračovť bodom 1.2
 
    1.2 chcem ich uložiť do grafového modelu. Použiť skript zo sekcie `Skripty na transformáciu pravidiel do grafovych modelov`
+   1.3 chcem vizualizovať grafový model. Použiť skript zo sekcie `Skripty na transformáciu pravidiel do grafovych modelov`
 
 2) Chcem si vygenerovať pravidla. Použiť skripty zo sekcie `Generovanie pravidel`
 
