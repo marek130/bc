@@ -16,13 +16,13 @@
 # Postupy: 
 1) Mám pravidla (predpovede útokov)
 
-1.1 chcem ich vyzualivoať. Použiť jeden zo skriptov na vizualizáciu. Ak chcem graf uložiť pokračovť bodom 1.2
+   1.1 chcem ich vyzualivoať. Použiť jeden zo skriptov na vizualizáciu. Ak chcem graf uložiť pokračovť bodom 1.2
 
-1.2 chcem ich uložiť do grafového modelu. Použiť skript zo sekcie `Skripty na transformáciu pravidiel do grafovych modelov`
+   1.2 chcem ich uložiť do grafového modelu. Použiť skript zo sekcie `Skripty na transformáciu pravidiel do grafovych modelov`
 
 2) Chcem si vygenerovať pravidla. Použiť skripty zo sekcie `Generovanie pravidel`
 
-2.1 Pokračovať bodom 1
+   2.1 Pokračovať bodom 1
 
 # Popisy jednotlivých súborov
  ---
