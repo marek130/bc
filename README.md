@@ -1,6 +1,6 @@
 # Praktická časť k bakalárskej práci: Grafové modely síťových útoků a jejich aplikace
  
- Repozitár obsahuje 7 súborov:
+ Repozitár obsahuje 8 súborov:
  * matrix.py
  * matrixToNeo4j.py
  * petriNet.py
