@@ -23,7 +23,7 @@ def visualize():
                 if json_data["matrix"][i][k] == 1:
                     relationships.append(Relationship(tmpPreconditions[i], "_", tmpPrivileges[k])) # IF THERE IS RELATIONSHIP ADD IT
                 if precondition == privilege:
-                        relationships.append(Relationship(tmpPrivileges[k], "_", tmpPreconditions[i])) # IF THERE IS BACKWARD EDGE ADD IT
+                        relationships.append(Relationship(tmpPrivileges[k], "backward", tmpPreconditions[i])) # IF THERE IS BACKWARD EDGE ADD IT
             createdAllPrivileges = True
         
 
