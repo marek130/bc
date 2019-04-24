@@ -2,6 +2,7 @@
  
  Repozitár obsahuje 7 súborov:
  * matrix.py
+ * matrixToNeo4j.py
  * petriNet.py
  * rulesToJSON.py
  * rulesToNeo4j.py
@@ -22,6 +23,7 @@
 ### `MATRIX.PY`
 - skript na generovanie matice susednosti z pravidiel SABU
 - skript berie ako argument cestu k súboru so SABU pravidlami
+- výsledok je pre prehľadnosť uložený v JSON tvare
 
 ### `PETRINET.PY`
 - skript na transformáciu pravidiel do petriho sieti
@@ -39,6 +41,10 @@
 - skript berie 1 argument a to cestu k súboru s pravidlami
 - **požiadavky**: knižnica py2neo
 
+### `MATRIXTONEO4j.PY`
+- skript na vizualiz8ciu grafu útoku vo formáte matice susednosti. Vizualizácia je prevedená do Neo4j
+- skipt požaduje 1 argument predstavujúci cestu k súboru obsahujúci výsledok skriptu `matrix.py
+`
 ### `JSONTONEO4J.PY`
 - skript na vizualizáciu grafu útoku vo formáte JSON do grafovej databáze Neo4j
 - skript požaduje k behu súbor ./jsonData , obsahujúci graf útoku vygenerovaný skriptom `rulesToJSON.py`
