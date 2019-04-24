@@ -60,6 +60,8 @@ def printMatrix(matrix):
         print("MATRIX:")
         print("--- rows: " + str(len(matrix[1])))
         print("--- columns: " + str(len(matrix[2])))
+	print("prerequisites: " + str(matrix[1]))
+	print("privileges: " + str(matrix[2]))
         for row in matrix[0]:
                 print(row)
 
