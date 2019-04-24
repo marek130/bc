@@ -24,6 +24,7 @@
 - skript na generovanie matice susednosti z pravidiel SABU
 - skript berie ako argument cestu k súboru so SABU pravidlami
 - výsledok je pre prehľadnosť uložený v JSON tvare
+- **požiadavky**: knižnica JSON
 
 ### `PETRINET.PY`
 - skript na transformáciu pravidiel do petriho sieti
