@@ -1,10 +1,13 @@
 import sys
+import json
 
 def createMatrix():
-	matrix = []
-	result = parseFile(matrix)
-        printMatrix(result)
-        return result
+        matrix = []
+        result = parseFile(matrix)
+        #printMatrix(result) UNCOMMENT THIS LINE IF YOU WANT 2D FORMAT OF MATRIX
+        json_data = json.dumps({"matrix": result[0], "preconditions": result[1], "privileges": result[2]}, indent=4)
+        print(json_data)
+        return json_data
 
 
 def addNewPrerequisity(prerequisity, prerequisites, widthOfMatrix, matrix):
@@ -60,8 +63,6 @@ def printMatrix(matrix):
         print("MATRIX:")
         print("--- rows: " + str(len(matrix[1])))
         print("--- columns: " + str(len(matrix[2])))
-	print("prerequisites: " + str(matrix[1]))
-	print("privileges: " + str(matrix[2]))
         for row in matrix[0]:
                 print(row)
 
