@@ -13,18 +13,8 @@
 * Elementary OS 5
 * python 2.7.12
 
-# Postupy: 
-1) Mám pravidla (predpovede útokov)
-
-   1.1 chcem ich vyzualivoať. Použiť jeden zo skriptov na `Skripty na vizualizáciu`. Ak chcem graf uložiť pokračovť bodom 1.2
-
-   1.2 chcem ich uložiť do grafového modelu. Použiť skript zo sekcie `Skripty na transformáciu pravidiel do grafovych modelov`
-   
-   1.3 chcem vizualizovať grafový model. Použiť jeden zo skriptov na `Skripty na vizualizáciu`
-
-2) Chcem si vygenerovať pravidla. Použiť skripty zo sekcie `Skripty na generovanie pravidiel`
-
-   2.1 Pokračovať bodom 1
+# Postup: 
+ ![postup](https://raw.githubusercontent.com/marek130/bc/master/postup.jpg "Logo Title Text 1")
 
 # Popisy jednotlivých súborov
  ---
