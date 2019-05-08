@@ -5,11 +5,11 @@ import copy
 data = {"START_NODES": []}
 
 
-def findIfThereIs(attempt, nameOfNode, companyOfNode):
+def findIfThereIs(category, nodeName, port):
 	global data
 
 	for node in data["START_NODES"]:
-		if node["Name"] == nameOfNode and node["Event"] == attempt and node["Company"] == companyOfNode:
+		if node["NodeName"] == nodename and node["Category"] == category and node["Port"] == port:
 			return True
 	return False
 
@@ -17,12 +17,10 @@ def findIfThereIs(attempt, nameOfNode, companyOfNode):
 def generateNodeContext(node):
 	global data
 
-	companyOfNode = ".".join(node.split(".")[:-2])
-	nameOfNode = node.split(".")[-2:-1][0]
-	attempt = node.split(".")[-1]
-	tmp = {"Company": companyOfNode, "Name": nameOfNode, "Event": attempt, "CONF": 1, "Predictions": [],
+	nodename, category, port = node.split("_")
+	tmp = {"NodeName": nodename, "Category": category, "Port": port, "CONF": 1, "Predictions": [],
 		   "DependsAlsoOn": []}
-	return (findIfThereIs(attempt, nameOfNode, companyOfNode), tmp)
+	return (findIfThereIs(category, nodename, port), tmp)
 
 
 def parseFile():
@@ -59,8 +57,8 @@ def parseFile():
 			currentNodesCopy = copy.deepcopy(currentNodes)
 			# DEPENDSALSOON
 			for nodeCopy, _tmp in currentNodesCopy:  # list terajsich zaciatocnych uzlov bez aktualneho v loope
-				if nodeCopy["Name"] != mainNodeCopy["Name"] or nodeCopy["Company"] != mainNodeCopy["Company"] or \
-						nodeCopy["Event"] != mainNodeCopy["Event"]:
+				if nodeCopy["NodeName"] != mainNodeCopy["NodeName"] or nodeCopy["Category"] != mainNodeCopy["Category"] or \
+						nodeCopy["Port"] != mainNodeCopy["Port"]:
 					_tmpNodeCopy = copy.deepcopy(nodeCopy)
 					_tmpNodeCopy.pop("CONF")
 					_tmpNodeCopy.pop("Predictions")
@@ -75,8 +73,8 @@ def parseFile():
 				data["START_NODES"].append(mainNodeCopy)
 			else:
 				for i in range(len(data["START_NODES"])):  # najde uzol ktory tam uz bol
-					if data["START_NODES"][i]["Name"] == mainNodeCopy["Name"] and data["START_NODES"][i]["Company"] == \
-							mainNodeCopy["Company"] and data["START_NODES"][i]["Event"] == mainNodeCopy["Event"]:
+					if data["START_NODES"][i]["NodeName"] == mainNodeCopy["NodeName"] and data["START_NODES"][i]["Category"] == \
+							mainNodeCopy["Category"] and data["START_NODES"][i]["Port"] == mainNodeCopy["Port"]:
 						data["START_NODES"][i]["Predictions"] += listOfPredicitions
 						break
 
@@ -91,8 +89,8 @@ def transitive():
 			copyOfPrediction = copy.deepcopy(prediction)
 			for nextNode in tmp["START_NODES"]:
 				copyOfNextNode = copy.deepcopy(nextNode)
-				if copyOfPrediction["Name"] == copyOfNextNode["Name"] and copyOfPrediction["Company"] == copyOfNextNode[
-					"Company"] and copyOfPrediction["Event"] == copyOfNextNode["Event"]:
+				if copyOfPrediction["NodeName"] == copyOfNextNode["NodeName"] and copyOfPrediction["Category"] == copyOfNextNode[
+					"Category"] and copyOfPrediction["Port"] == copyOfNextNode["Port"]:
 					newPredictions = copy.deepcopy(copyOfNextNode["Predictions"])
 					i = 0
 					for pred in newPredictions:
