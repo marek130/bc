@@ -27,7 +27,7 @@ def parseLineOfJSON(line):
             if not re.search("warden_filer", node['Name']):
                 node_name = node['Name']
                 break
-        alert = node_name + "." + json_data['Category'][0]  + "_" + str(json_data['Target'][0]['Port'][0])
+        alert = node_name + "_" + json_data['Category'][0]  + "_" + str(json_data['Target'][0]['Port'][0])
         time_of_alert = int(timegm(time.strptime(re.sub("( |T|\..*|\+.*|Z.*)", "", json_data['DetectTime']), "%Y-%m-%d%H:%M:%S")))
         return {"IP": ip_address, "alert": alert, "Time": time_of_alert}
     else:
