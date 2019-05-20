@@ -2,13 +2,13 @@ import json
 import sys
 import copy
 
-data = {"START_NODES": []}
+data = {"StartNodes": []}
 
 
 def findIfThereIs(category, nodeName, port):
 	global data
 
-	for node in data["START_NODES"]:
+	for node in data["StartNodes"]:
 		if node["NodeName"] == nodename and node["Category"] == category and node["Port"] == port:
 			return True
 	return False
@@ -70,24 +70,24 @@ def parseFile():
 				listOfPredicitions.append(b)
 			if not wasThere:  # ak nebol uzol predtym v zaciatocnych tak ho prida
 				mainNodeCopy["Predictions"] += listOfPredicitions
-				data["START_NODES"].append(mainNodeCopy)
+				data["StartNodes"].append(mainNodeCopy)
 			else:
-				for i in range(len(data["START_NODES"])):  # najde uzol ktory tam uz bol
-					if data["START_NODES"][i]["NodeName"] == mainNodeCopy["NodeName"] and data["START_NODES"][i]["Category"] == \
-							mainNodeCopy["Category"] and data["START_NODES"][i]["Port"] == mainNodeCopy["Port"]:
-						data["START_NODES"][i]["Predictions"] += listOfPredicitions
+				for i in range(len(data["StartNodes"])):  # najde uzol ktory tam uz bol
+					if data["StartNodes"][i]["NodeName"] == mainNodeCopy["NodeName"] and data["StartNodes"][i]["Category"] == \
+							mainNodeCopy["Category"] and data["StartNodes"][i]["Port"] == mainNodeCopy["Port"]:
+						data["StartNodes"][i]["Predictions"] += listOfPredicitions
 						break
 
 
 def transitive():
 	tmp = copy.deepcopy(data)
-	result = {"START_NODES": []}
-	for node in tmp["START_NODES"]:
+	result = {"StartNodes": []}
+	for node in tmp["StartNodes"]:
 		copyOfNode = copy.deepcopy(node)
 		j = 0
 		for prediction in node["Predictions"]:
 			copyOfPrediction = copy.deepcopy(prediction)
-			for nextNode in tmp["START_NODES"]:
+			for nextNode in tmp["StartNodes"]:
 				copyOfNextNode = copy.deepcopy(nextNode)
 				if copyOfPrediction["NodeName"] == copyOfNextNode["NodeName"] and copyOfPrediction["Category"] == copyOfNextNode[
 					"Category"] and copyOfPrediction["Port"] == copyOfNextNode["Port"]:
@@ -104,7 +104,7 @@ def transitive():
 			copyOfNode["Predictions"][j]["Predictions"] = copyOfPrediction["Predictions"]
 			j += 1
 		tmpNewNode = copyOfNode
-		result["START_NODES"].append(tmpNewNode)
+		result["StartNodes"].append(tmpNewNode)
 	return result
 
 
