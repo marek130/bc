@@ -15,7 +15,6 @@ def parseFile(data):
 		tmpL = tmpL.strip()
 		startVertices = tmpL.split(',')
 		for vertex in startVertices:
-			print vertex
 			if not graph.has_place(vertex):
 				graph.add_place(Place(vertex))
 				graph.add_output(vertex, "Attacker", Variable('p'))
@@ -28,7 +27,6 @@ def parseFile(data):
 			if not graph.has_transition(vertex.upper()):
 				graph.add_transition(Transition(vertex.upper(),  Expression('p>0.5')))
 				for ver in startVertices:
-					print ver
 					graph.add_input(ver, vertex.upper(), Variable("Conf" + conf))
 			else:
 				graph.add_transition(Transition(vertex.upper() + str(err),  Expression('p>0.5')))
