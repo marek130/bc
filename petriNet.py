@@ -1,5 +1,4 @@
 from snakes.nets import *
-import json
 import sys
 
 graph = PetriNet('First net')
