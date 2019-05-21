@@ -1,47 +1,59 @@
 from snakes.nets import *
 import json
+import sys
 
 graph = PetriNet('First net')
 graph.add_transition(Transition("Attacker"))
-err = 1
+err = {}
+preconditions = {}
 
 def parseFile(data):
-	global graph, err
+	global graph, err, preconditions
 	file = data.split("\n")[:-1]
 	for line in file:
-		currentNodes = []
-		currentPredictions = []
 		tmpL, tmpR = line.split('==>')
 		tmpL = tmpL.strip()
 		startVertices = tmpL.split(',')
 		for vertex in startVertices:
-			if not graph.has_place(vertex):
-				graph.add_place(Place(vertex))
-				graph.add_output(vertex, "Attacker", Variable('p'))
+			if vertex not in preconditions:
+				nameOfVertex = ""
+				if vertex not in err:
+					nameOfVertex = vertex
+					err[vertex] = 1
+				else:
+					nameOfVertex = vertex + "_(" + str(err[vertex]) + ")"
+					err[vertex] += 1
+				preconditions[vertex] = nameOfVertex
+				graph.add_place(Place(nameOfVertex))
+				graph.add_output(nameOfVertex, "Attacker", Expression('x'))
 		endVertices, supp, conf = tmpR.split("#")
-		conf = float(conf.split(" ")[1].rstrip())
-		conf = str(conf).replace(".","")
 		endVertices = endVertices.strip()
 		endVertices = endVertices.split(',')
 		for vertex in endVertices:
-			if not graph.has_transition(vertex.upper()):
-				graph.add_transition(Transition(vertex.upper(),  Expression('p>0.5')))
-				for ver in startVertices:
-					graph.add_input(ver, vertex.upper(), Variable("Conf" + conf))
+			nameOfTransition = ""
+			if vertex not in err:
+				nameOfTransition = vertex
+				err[vertex] = 1
 			else:
-				graph.add_transition(Transition(vertex.upper() + str(err),  Expression('p>0.5')))
-				for ver in startVertices:
-					graph.add_input(ver, vertex.upper() + str(err), Variable("Conf" + conf))
-				err += 1
-			if graph.has_place(vertex):
-				graph.add_output(vertex, vertex.upper(), Variable('p'))
+				nameOfTransition = vertex + "_(" + str(err[vertex]) + ")"
+				err[vertex] += 1
+			
+			graph.add_transition(Transition(nameOfTransition))
+			for ver in startVertices:
+				graph.add_input(preconditions[ver], nameOfTransition, Variable('x'))
+			nameOfNode = vertex + "_(" + str(err[vertex]) + ")"
+			err[vertex] += 1
+			graph.add_place(Place(nameOfNode))
+			graph.add_output(nameOfNode, nameOfTransition, Expression(vertex))
+
 
 
 
 
 def init():
-	data = open("data", "r") 
+	data = open(sys.argv[1], "r") 
 	a = data.read()
 	parseFile(a)
+	return graph
 
 init()
