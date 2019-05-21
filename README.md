@@ -45,7 +45,7 @@
 ### `MATRIXTONEO4j.PY`
 - skript na vizualizáciu grafu útoku vo formáte matice susednosti. Vizualizácia je prevedená do Neo4j
 - skipt požaduje 1 argument predstavujúci cestu k súboru obsahujúci výsledok skriptu `matrix.py`
-- **požiadavky**: knižnica JSON, knižnica sys, kniznica py2neo
+- **požiadavky**: knižnica JSON, knižnica sys, knižnica py2neo
 
 ### `JSONTONEO4J.PY`
 - skript na vizualizáciu grafu útoku vo formáte JSON do grafovej databáze Neo4j
