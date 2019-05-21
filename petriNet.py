@@ -9,7 +9,6 @@ def parseFile(data):
 	global graph, err
 	file = data.split("\n")[:-1]
 	for line in file:
-		print "EER"
 		currentNodes = []
 		currentPredictions = []
 		tmpL, tmpR = line.split('==>')
@@ -20,13 +19,11 @@ def parseFile(data):
 			if not graph.has_place(vertex):
 				graph.add_place(Place(vertex))
 				graph.add_output(vertex, "Attacker", Variable('p'))
-		print "ERRE"
 		endVertices, supp, conf = tmpR.split("#")
 		conf = float(conf.split(" ")[1].rstrip())
 		conf = str(conf).replace(".","")
 		endVertices = endVertices.strip()
 		endVertices = endVertices.split(',')
-		print "P:O:IIO"
 		for vertex in endVertices:
 			if not graph.has_transition(vertex.upper()):
 				graph.add_transition(Transition(vertex.upper(),  Expression('p>0.5')))
@@ -40,7 +37,7 @@ def parseFile(data):
 				err += 1
 			if graph.has_place(vertex):
 				graph.add_output(vertex, vertex.upper(), Variable('p'))
-			print "ASDSDSAADSD"
+
 
 
 
