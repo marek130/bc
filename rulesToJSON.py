@@ -9,7 +9,7 @@ def findIfThereIs(category, nodeName, port):
 	global data
 
 	for node in data["StartNodes"]:
-		if node["NodeName"] == nodename and node["Category"] == category and node["Port"] == port:
+		if node["NodeName"] == nodeName and node["Category"] == category and node["Port"] == port:
 			return True
 	return False
 
