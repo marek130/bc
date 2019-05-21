@@ -15,24 +15,24 @@ def parseFile():
 	data = json.loads(json_data)
 
 	for node in data["StartNodes"]:
-		nameForNode = node["Company"] + "_" + node["Name"] + "_" + node["Event"]
+		nameForNode = node["Category"] + "_" + node["NodeName"] + "_" + node["Port"]
 		objectNode =  Node("node", name=nameForNode)
 		nodesList[nameForNode] = objectNode
 		relationships.append(Relationship(ATTACKER, "_", objectNode))
 
 	for node in data["StartNodes"]: # dict [NAME => OBJECT]
-		nameNode = node["Company"] + "_" + node["Name"] + "_" + node["Event"]
+		nameNode = node["Category"] + "_" + node["NodeName"] + "_" + node["Port"]
 		for predication in node["Predictions"]:
-			nameForPredicate = predication["Company"] + "_" + predication["Name"] + "_" + predication["Event"]
+			nameForPredicate = predication["Category"] + "_" + predication["NodeName"] + "_" + predication["Port"]
 			predicatis = Node("Predication", name=nameForPredicate, predict=True, conf=predication["CONF"])
 			relationships.append(Relationship(nodesList[nameNode], "_", predicatis))
 			for dependsNode in predication["DependsAlsoOn"]:
-				matchName = dependsNode["Company"] + "_" + dependsNode["Name"] + "_" + dependsNode["Event"]
+				matchName = dependsNode["Category"] + "_" + dependsNode["NodeName"] + "_" + dependsNode["Port"]
 				for key, currentNode in nodesList.items():
 						if key == matchName:
 							relationships.append(Relationship(currentNode, "_", predicatis))
 			for nodis in data["StartNodes"]:
-				reverseNodeName = nodis["Company"] + "_" + nodis["Name"] + "_" + nodis["Event"]
+				reverseNodeName = nodis["Category"] + "_" + nodis["NodeName"] + "_" + nodis["Port"]
 				if reverseNodeName == nameForPredicate:
 					relationships.append(Relationship(predicatis, "I", nodesList[reverseNodeName]))
 
