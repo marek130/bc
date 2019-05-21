@@ -17,7 +17,10 @@ def findIfThereIs(category, nodeName, port):
 def generateNodeContext(node):
 	global data
 
-	nodename, category, port = node.split("_")
+	tmpArray = node.split("_")
+	nodename = "_".join(tmpArray[:-2])
+	category = tmpArray[-2]
+	port     = tmpArray[-1]
 	tmp = {"NodeName": nodename, "Category": category, "Port": port, "CONF": 1, "Predictions": [],
 		   "DependsAlsoOn": []}
 	return (findIfThereIs(category, nodename, port), tmp)
